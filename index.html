@@ -1,18 +1,3 @@
-<?php
-if(!isset($_POST["bd"]))
-{
-$bd = '1/15/1929';
-$yd =  "Martin Luther King, Jr was born on a " . date('l', strtotime($bd));
-}
-else
-{
-$bd = $_POST['bd'];
-$yd =  "This person was born on a " . date('l', strtotime($bd));
-}
-?>
-
-
-
 
 <!DOCTYPE html>
 <html>
@@ -29,20 +14,38 @@ $yd =  "This person was born on a " . date('l', strtotime($bd));
 margin-right: 0 !important; margin-left: 0 !important;
 }
 </style>
+
 </head>
 <body>
 <!-- First Page -->
 <form action="day_born.php" method="post">
 <div data-role="page" data-theme='e'>
 <div data-role="header" data-theme='e'>
-<h1>Find a day someone was born</h1>
+<h1>Find day of week someone was born</h1>
 </div>
 <br><br>
- Born on : <input type="text" name="bd" value="<?php echo $bd ?>"><br>
- Day was : <input type="text" name="yourday" value="<?php echo $yd ?>"><br>
-<input type="Submit" name="submit" value="Submit">
+ Born on : <input type="text" id="bd" ><br>
+ Day was : <input type="text" id="dow" ><br>
+<input type="button" id="submit" value="Submit">
 </div>
 </form>
+<script>
+$('#submit').on('click' , function(){
+
+    var d = new Date($('#bd').val());
+
+    $('#dow').val(weekday[d.getDay()]);
+});
+
+var weekday=new Array(7);
+ weekday[0]="Sunday";
+ weekday[1]="Monday";
+ weekday[2]="Tuesday";
+ weekday[3]="Wednesday";
+ weekday[4]="Thursday";
+ weekday[5]="Friday";
+ weekday[6]="Saturday";
+ </script>
 
 
 </body>
